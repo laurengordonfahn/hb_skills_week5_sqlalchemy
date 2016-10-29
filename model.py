@@ -16,25 +16,36 @@ class Model(db.Model):
     """Car model."""
 
     __tablename__ = "models"
-    model_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer, nullable=False)
     brand_name = db.Column(db.String(50), db.ForeignKey('brands.name'))
     name = db.Column(db.String(50), nullable=False)
 
     brand = db.relationship("Brand", backref='models')
 
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Model id=%s year%s brand_name=%s name=%s>" % (
+            self.id, self.year, self.brand_name, self.name)
+
 
 class Brand(db.Model):
     """Car brand."""
 
     __tablename__ = "brands"
-    brand_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     founded = db.Column(db.Integer)
     headquarters = db.Column(db.String(50))
     discontinued = db.Column(db.Integer)
 
 
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Brand id=%s name=%s founded=%s headquarters=%s discontinued=%s>" % (
+            self.id, self.name, self.founded, self.headquarters, self.discontinued)
 
 
 # End Part 1

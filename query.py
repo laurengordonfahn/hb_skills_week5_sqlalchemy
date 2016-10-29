@@ -18,23 +18,30 @@ init_app()
 # -------------------------------------------------------------------
 # Part 2: Write queries
 
-
 # Get the brand with the **id** of 8.
-
+db.session.query(Brand.name).filter_by(id=8).one()
 # Get all models with the **name** Corvette and the **brand_name** Chevrolet.
+db.session.query(Model.name).filter_by(name="Corvette").all()
 
 # Get all models that are older than 1960.
+db.session.query(Model.name).filter(Model.year > 1960).all()
 
 # Get all brands that were founded after 1920.
 
+db.session.query(Brand.name).filter(Brand.founded > 1920).all()
+
 # Get all models with names that begin with "Cor".
+db.session.query(Model.name).filter(Model.name.like('Cor%')).all()
 
 # Get all brands that were founded in 1903 and that are not yet discontinued.
+db.session.query(Brand.name).filter((Brand.founded==1903) & (Brand.discontinued !=None)).all()
 
 # Get all brands that are either 1) discontinued (at any time) or 2) founded
 # before 1950.
+db.session.query(Brand.name).filter((Brand.discontinued==None) | (Brand.founded < 1950)).all()
 
 # Get all models whose brand_name is not Chevrolet.
+db.session.query(Model.brand_name).filter(Model.brand_name != 'Chevrolet').all()
 
 # Fill in the following functions. (See directions for more info.)
 
